@@ -14,6 +14,6 @@ export class AppComponent {
   }
 
   isShoppingNavSelected() {
-    return this.selectedNav ==='shopping';
+    return this.selectedNav === 'shopping';
   }
 }
