@@ -1,26 +1,30 @@
-import { HomeComponent } from './home/home.component';
-import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
+
+import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+
+import { EmptyRecipeComponent } from './recipes/empty-recipe/empty-recipe.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { RecipesComponent } from './recipes/recipes.component';
-import { HeaderComponent } from './header/header.component';
-import { RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 
 const appRoutes: Routes = [
   {
     path: '',
-    component: HomeComponent,
-    children: [
-    ]
+
+    redirectTo: '/recipes',
+    pathMatch: 'full'
   },
   {
     path: 'recipes',
     component: RecipesComponent,
     children: [
-      { path: ':id', component: RecipeDetailComponent }
-      // { path: ':id/edit', component: RecipeEditComponent } --after RecipeEDitComponen set comment out here
+
+      { path: '', component: EmptyRecipeComponent, pathMatch: 'full' },
+      { path: 'new', component: RecipeEditComponent }, // static parameter should come before dynamic parameter
+      { path: ':id', component: RecipeDetailComponent },
+      { path: ':id/edit', component: RecipeEditComponent }
     ]
   },
   {
