@@ -3,7 +3,7 @@ import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 
 export class RecipeService {
-  selectedRecipe = new EventEmitter<Recipe>();
+
 
   private recipes = [
     new Recipe(
@@ -34,7 +34,7 @@ export class RecipeService {
   }
 
   getRecipe(id: number): Recipe {
-    let myR = this.recipes.find(r => {
+    const myR = this.recipes.find(r => {
       return r.id === id;
     });
     return myR;
