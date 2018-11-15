@@ -1,7 +1,9 @@
 import { EventEmitter, Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
+
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
-import { Subject } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class RecipeService {
   recipesChanged = new Subject<Recipe[]>();
@@ -30,6 +32,9 @@ export class RecipeService {
       ]
     )
   ];
+
+  constructor(private http: HttpClient) {}
+
   getRecipes() {
     return this.recipes.slice();
   }
@@ -40,6 +45,12 @@ export class RecipeService {
       return r.id === id;
     });
     return myR;
+  }
+
+  setRecipes(recipeArray: Recipe[]) {
+    this.recipes = recipeArray.slice();
+    console.log(this.recipes);
+    this.recipesChanged.next(this.recipes.slice());
   }
 
   addRecipe(recipe: Recipe) {
@@ -57,5 +68,26 @@ export class RecipeService {
   removeRecipe(index: number) {
     this.recipes.splice(index - 1, 1);
     this.recipesChanged.next(this.recipes.slice());
+  }
+
+  //Server Interactions
+  saveRecipes() {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'true'
+      })
+    };
+
+    return this.http.put(
+      'https://myangularplayground.firebaseio.com/recipes.json',
+      this.recipes,
+      options
+    );
+  }
+
+  fetchRecipes() {
+    return this.http
+      .get('https://myangularplayground.firebaseio.com/recipes.json');
   }
 }
