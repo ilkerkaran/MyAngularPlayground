@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +6,11 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   private registeredUsers = [];
 
-  constructor() {}
+  constructor() {
+    const stockUsername: String = 'user1';
+    const stockPassword: String = '123';
+    this.registeredUsers.push({ stockUsername, stockPassword });
+  }
 
   signUpUser(username: String, password: String) {
     this.registeredUsers.push({ username, password });
@@ -36,11 +40,9 @@ export class AuthService {
   }
 
   signOut() {
-
     window.localStorage.clear();
-localStorage.removeItem('token_key');
+    localStorage.removeItem('token_key');
     console.log('sign-out executed.');
-
   }
 
   getToken() {

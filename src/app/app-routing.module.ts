@@ -18,17 +18,6 @@ const appRoutes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'recipes',
-    component: RecipesComponent,
-    canActivate: [AuthGuard],
-    children: [
-      { path: '', component: EmptyRecipeComponent, pathMatch: 'full' },
-      { path: 'new', component: RecipeEditComponent }, // static parameter should come before dynamic parameter
-      { path: ':id', component: RecipeDetailComponent },
-      { path: ':id/edit', component: RecipeEditComponent }
-    ]
-  },
-  {
     path: 'shopping-list',
     component: ShoppingListComponent,
     canActivate: [AuthGuard],
