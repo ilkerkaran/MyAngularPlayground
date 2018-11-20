@@ -17,20 +17,6 @@ const appRoutes: Routes = [
     redirectTo: '/recipes',
     pathMatch: 'full'
   },
-  {
-    path: 'shopping-list',
-    component: ShoppingListComponent,
-    canActivate: [AuthGuard],
-    children: [{ path: ':id/edit', component: ShoppingEditComponent }]
-  },
-  {
-    path: 'signup',
-    component: SignUpComponent
-  },
-  {
-    path: 'signin',
-    component: SignInComponent
-  },
   { path: '**', redirectTo: '' }
 ];
 
