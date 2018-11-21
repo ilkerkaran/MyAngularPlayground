@@ -9,7 +9,6 @@ const shoppingListRoute: Routes = [
   {
     path: '',
     component: ShoppingListComponent,
-    canActivate: [AuthGuard],
     children: [{ path: ':id/edit', component: ShoppingEditComponent }]
   }
 ];
