@@ -1,21 +1,28 @@
-import { AuthGuard } from './auth/auth.guard';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
-import { SignUpComponent } from './auth/sign-up/sign-up.component';
-import { EmptyRecipeComponent } from './recipes/empty-recipe/empty-recipe.component';
-import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
-import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { RecipesComponent } from './recipes/recipes.component';
-import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
-import { SignInComponent } from './auth/sign-in/sign-in.component';
+import { HomeComponent } from './home/home.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: '/recipes',
+    component: HomeComponent,
     pathMatch: 'full'
+  },
+  {
+    path: 'recipes',
+    loadChildren: './recipes/recipes.module#RecipesModule',
+    canLoad: [AuthGuard]
+  },
+  {
+    path: 'shopping-list',
+    loadChildren: './shopping-list/shopping-list.module#ShoppingListModule',
+    canLoad: [AuthGuard]
+  },
+  {
+    path: 'auth',
+    loadChildren: './auth/auth.module#AuthModule'
   },
   { path: '**', redirectTo: '' }
 ];

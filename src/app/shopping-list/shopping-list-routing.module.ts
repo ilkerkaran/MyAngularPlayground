@@ -2,12 +2,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { ShoppingListComponent } from './shopping-list.component';
-import { AuthGuard } from '../auth/auth.guard';
 import { ShoppingEditComponent } from './shopping-edit/shopping-edit.component';
+import { AuthGuard } from '../auth/auth.guard';
 
 const shoppingListRoute: Routes = [
   {
-    path: 'shopping-list',
+    path: '',
     component: ShoppingListComponent,
     canActivate: [AuthGuard],
     children: [{ path: ':id/edit', component: ShoppingEditComponent }]

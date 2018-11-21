@@ -10,9 +10,8 @@ import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 
 const recipesRoute: Routes = [
   {
-    path: 'recipes',
+    path: '',
     component: RecipesComponent,
-    canActivate: [AuthGuard],
     children: [
       { path: '', component: EmptyRecipeComponent, pathMatch: 'full' },
       { path: 'new', component: RecipeEditComponent }, // static parameter should come before dynamic parameter
