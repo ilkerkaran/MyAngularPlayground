@@ -1,11 +1,10 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Recipe } from 'src/app/recipes/recipe.model';
+import { RecipeService } from 'src/app/recipes/recipe.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
-import { Ingredient } from './../shared/ingredient.model';
-import { RecipeService } from './../recipes/recipe.service';
-import { Recipe } from '../recipes/recipe.model';
-import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-header',
