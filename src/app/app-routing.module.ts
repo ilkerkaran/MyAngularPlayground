@@ -1,6 +1,5 @@
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { NgModule } from '@angular/core';
-
 
 import { AuthGuard } from './auth/auth.guard';
 import { HomeComponent } from './core/home/home.component';
@@ -30,7 +29,12 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [],
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [
+    RouterModule.forRoot(appRoutes, {
+      preloadingStrategy: PreloadAllModules,
+      enableTracing: false
+    })
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
