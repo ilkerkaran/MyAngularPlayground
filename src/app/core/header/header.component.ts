@@ -28,7 +28,11 @@ export class HeaderComponent implements OnInit {
   }
 
   onSaveData() {
-    this.recipeService.saveRecipes().subscribe();
+    this.recipeService.saveRecipes().subscribe(
+      (response) => {
+        console.log(response);
+      }
+    );
   }
 
   onFetchData() {
@@ -36,7 +40,7 @@ export class HeaderComponent implements OnInit {
       .fetchRecipes()
       .pipe(
         map(response => {
-          this.fetchedRecipes = <Recipe[]>response;
+          this.fetchedRecipes = response;
           this.fetchedRecipes.forEach(r => {
             if (!r['ingredients']) {
               r.ingredients = [];

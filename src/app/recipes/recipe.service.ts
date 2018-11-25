@@ -70,12 +70,16 @@ export class RecipeService {
     this.recipesChanged.next(this.recipes.slice());
   }
 
-  //Server Interactions
+  // Server Interactions
   saveRecipes() {
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'true'
+        'Access-Control-Allow-Origin': 'true',
+        responseType: 'json',
+        observe: 'body',
+        //params : [],
+        reportProgress: 'true' // need to make request as HttpRequest to use the progress
       })
     };
 
@@ -87,7 +91,8 @@ export class RecipeService {
   }
 
   fetchRecipes() {
-    return this.http
-      .get('https://myangularplayground.firebaseio.com/recipes.json');
+    return this.http.get<Recipe[]>(
+      'https://myangularplayground.firebaseio.com/recipes.json'
+    );
   }
 }

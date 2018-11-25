@@ -1,8 +1,14 @@
-import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
+import {
+  RouterModule,
+  Routes,
+  PreloadAllModules,
+  NoPreloading
+} from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { AuthGuard } from './auth/auth.guard';
 import { HomeComponent } from './core/home/home.component';
+import { AppCustomPreloader } from './shared/custom-preloader';
 
 const appRoutes: Routes = [
   {
@@ -12,13 +18,12 @@ const appRoutes: Routes = [
   },
   {
     path: 'recipes',
-    loadChildren: './recipes/recipes.module#RecipesModule',
-    canLoad: [AuthGuard]
+    loadChildren: './recipes/recipes.module#RecipesModule'
   },
   {
     path: 'shopping-list',
     loadChildren: './shopping-list/shopping-list.module#ShoppingListModule',
-    canLoad: [AuthGuard]
+    data: { preload: true }
   },
   {
     path: 'auth',
@@ -31,10 +36,10 @@ const appRoutes: Routes = [
   declarations: [],
   imports: [
     RouterModule.forRoot(appRoutes, {
-      preloadingStrategy: PreloadAllModules,
-      enableTracing: false
+      preloadingStrategy: PreloadAllModules
     })
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AppCustomPreloader]
 })
 export class AppRoutingModule {}
